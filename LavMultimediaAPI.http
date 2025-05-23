@@ -1,0 +1,6 @@
+@LavMultimediaAPI_HostAddress = http://localhost:5022
+
+GET {{LavMultimediaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
