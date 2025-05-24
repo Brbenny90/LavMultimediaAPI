@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LavMultimediaAPI")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute(" ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de7e97dda7dd2dc94910140ceb605c9fab235721")]
 [assembly: System.Reflection.AssemblyProductAttribute("LavMultimediaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LavMultimediaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

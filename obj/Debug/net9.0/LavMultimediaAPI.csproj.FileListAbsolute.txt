@@ -210,3 +210,4 @@ C:\Users\b-simoes\LavMultimedia\LavMultimediaAPI\obj\Debug\net9.0\refint\LavMult
 C:\Users\b-simoes\LavMultimedia\LavMultimediaAPI\obj\Debug\net9.0\LavMultimediaAPI.pdb
 C:\Users\b-simoes\LavMultimedia\LavMultimediaAPI\obj\Debug\net9.0\LavMultimediaAPI.genruntimeconfig.cache
 C:\Users\b-simoes\LavMultimedia\LavMultimediaAPI\obj\Debug\net9.0\ref\LavMultimediaAPI.dll
+C:\Users\b-simoes\LavMultimedia\LavMultimediaAPI\obj\Debug\net9.0\LavMultimediaAPI.sourcelink.json
