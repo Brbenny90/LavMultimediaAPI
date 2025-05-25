@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore dependencies
-        run: dotnet restore LavMultimediaAPI.csproj
+        run: dotnet restore LavMultimediaAPI/LavMultimediaAPI.csproj
 
       - name: Build
-        run: dotnet build LavMultimediaAPI.csproj --configuration Release
+        run: dotnet build LavMultimediaAPI/LavMultimediaAPI.csproj --configuration Release
 
       - name: Publish
-        run: dotnet publish LavMultimediaAPI.csproj -c Release -o ./publish
+        run: dotnet publish LavMultimediaAPI/LavMultimediaAPI.csproj -c Release -o ./publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
