@@ -1,3 +1,6 @@
+// Forçando redeploy via GitHub Actions
+
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
