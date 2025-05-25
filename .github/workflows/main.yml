@@ -1,0 +1,65 @@
+name: Build and deploy LavMultimediaAPI to Azure Web App
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Restaurar dependências
+        run: dotnet restore LavMultimediaAPI.csproj
+
+      - name: Compilar
+        run: dotnet build LavMultimediaAPI.csproj --configuration Release
+
+      - name: Publicar
+        run: dotnet publish LavMultimediaAPI.csproj -c Release -o ./publish
+
+      - name: Fazer upload do artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: ./publish
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Baixar artefato da build
+        uses: actions/download-artifact@v4
+        with:
+          name: app
+
+      - name: Login no Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy para Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'lavmultimediaapp'
+          package: .
