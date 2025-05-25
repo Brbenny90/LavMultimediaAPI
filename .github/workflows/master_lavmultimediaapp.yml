@@ -13,27 +13,26 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Instalar .NET
+      - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
-      - name: Restaurar pacotes NuGet
+      - name: Restore dependencies
         run: dotnet restore LavMultimediaAPI.csproj
 
-      - name: Build do projeto
+      - name: Build project
         run: dotnet build LavMultimediaAPI.csproj --configuration Release --no-restore
 
-      - name: Publicar projeto
+      - name: Publish project
         run: dotnet publish LavMultimediaAPI.csproj -c Release -o ./publish --no-restore
 
-      - name: Upload dos artefatos
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
-          name: published-app
+          name: dotnet-app
           path: ./publish
 
   deploy:
@@ -41,28 +40,28 @@ jobs:
     needs: build
     environment:
       name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write
       contents: read
 
     steps:
-      - name: Baixar artefatos da etapa de build
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: published-app
-          path: ./publish
+          name: dotnet-app
 
-      - name: Login no Azure
+      - name: Login to Azure
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C7ED99141E7C4B9C8ED523EEC178EACB }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DFF96671980443B7AC709BD6604DDFC5 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F205EDEA791540E8A83A6C5715CABC88 }}
 
-      - name: Deploy para Azure Web App
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'lavmultimediaapp'
           slot-name: 'Production'
-          package: ./publish
+          package: .
