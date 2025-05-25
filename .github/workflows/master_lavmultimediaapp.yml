@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
@@ -23,16 +23,16 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore LavMultimediaAPI.csproj
 
-      - name: Build project
-        run: dotnet build LavMultimediaAPI.csproj --configuration Release --no-restore
+      - name: Build
+        run: dotnet build LavMultimediaAPI.csproj --configuration Release
 
-      - name: Publish project
-        run: dotnet publish LavMultimediaAPI.csproj -c Release -o ./publish --no-restore
+      - name: Publish
+        run: dotnet publish LavMultimediaAPI.csproj -c Release -o ./publish
 
-      - name: Upload artifact for deployment
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dotnet-app
+          name: .net-app
           path: ./publish
 
   deploy:
