@@ -1,4 +1,4 @@
-nname: Build and deploy ASP.Net Core app to Azure Web App - lavmultimediaapp
+name: Build and deploy ASP.Net Core app to Azure Web App - lavmultimediaapp
 
 on:
   push:
